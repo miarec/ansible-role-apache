@@ -34,3 +34,11 @@
   when:
     - ansible_distribution_major_version | int >= 8
     - not localhost_cert.stat.exists
+
+- name: Configure umask
+  lineinfile: 
+    dest: "/etc/sysconfig/httpd"
+    regexp: '^umask(\s+)'
+    line: "umask {{ apache_umask }}"
+    state: present
+  notify: restart apache

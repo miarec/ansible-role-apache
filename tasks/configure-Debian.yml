@@ -52,3 +52,11 @@
     state: absent
   notify: restart apache
   when: apache_remove_default_vhost
+
+- name: Configure umask
+  lineinfile: 
+    dest: "{{ apache_conf_path }}/envvars"
+    regexp: '^umask(\s+)'
+    line: "umask {{ apache_umask }}"
+    state: present
+  notify: restart apache
