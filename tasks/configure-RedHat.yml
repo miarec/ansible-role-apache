@@ -35,10 +35,23 @@
     - ansible_distribution_major_version | int >= 8
     - not localhost_cert.stat.exists
 
-- name: Configure umask
+- name: Configure umask (/etc/sysconfig/httpd)
   lineinfile: 
     dest: "/etc/sysconfig/httpd"
     regexp: '^umask(\s+)'
     line: "umask {{ apache_umask }}"
     state: present
   notify: restart apache
+  when: ansible_service_mgr != "systemd"
+
+- name: Configure umask (SystemD Unit)
+  lineinfile:
+    path: "/usr/lib/systemd/system/httpd.service"
+    regexp: '^UMask='
+    line: "UMask={{ apache_umask }}"
+    state: present
+    lineafter: "^\[Service\]"
+  when: ansible_service_mgr == "systemd"
+  notify: 
+    - reload systemd
+    - restart apache

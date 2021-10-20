@@ -53,10 +53,14 @@
   notify: restart apache
   when: apache_remove_default_vhost
 
-- name: Configure umask
-  lineinfile: 
-    dest: "{{ apache_conf_path }}/envvars"
-    regexp: '^umask(\s+)'
-    line: "umask {{ apache_umask }}"
+- name: Configure umask (SystemD Unit)
+  lineinfile:
+    path: "/usr/lib/systemd/system/httpd.service"
+    regexp: '^UMask='
+    line: "UMask={{ apache_umask }}"
     state: present
-  notify: restart apache
+    lineafter: "^\[Service\]"
+  when: ansible_service_mgr == "systemd"
+  notify: 
+    - reload systemd
+    - restart apache

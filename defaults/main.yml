@@ -57,4 +57,4 @@ apache_restart_state: restarted
 # if you want to upgrade or switch versions using a new repo.
 apache_packages_state: present
 
-apache_umask: "002"
+apache_umask: "0002"
