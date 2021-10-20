@@ -39,9 +39,9 @@
   lineinfile:
     path: "/usr/lib/systemd/system/httpd.service"
     regexp: '^UMask='
-    line: "UMask={{ apache_umask }}"
+    line: 'UMask={{ apache_umask }}'
     state: present
-    insertafter: "^\[Service\]"
+    insertafter: '^\\[Service\\]'
   when: ansible_service_mgr == "systemd"
   notify: 
     - reload systemd
