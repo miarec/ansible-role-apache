@@ -59,7 +59,7 @@
     regexp: '^UMask='
     line: "UMask={{ apache_umask }}"
     state: present
-    lineafter: "^\[Service\]"
+    insertafter: "^\[Service\]"
   when: ansible_service_mgr == "systemd"
   notify: 
     - reload systemd

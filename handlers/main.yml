@@ -4,3 +4,7 @@
     name: "{{ apache_service }}"
     state: "{{ apache_restart_state }}"
   become: yes
+
+- name: reload systemd
+  become: yes
+  command: systemctl daemon-reload
