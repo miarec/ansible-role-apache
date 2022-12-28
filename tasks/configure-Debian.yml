@@ -61,6 +61,6 @@
     state: present
     insertafter: '^\[Service\]'
   when: ansible_service_mgr == "systemd"
-  notify: 
+  notify:
     - reload systemd
     - restart apache

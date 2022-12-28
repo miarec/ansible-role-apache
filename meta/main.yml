@@ -4,6 +4,7 @@ dependencies: []
 galaxy_info:
   author: geerlingguy
   description: Apache 2.x for Linux.
+  role_name: apache
   company: "Midwestern Mac, LLC"
   license: "license (BSD, MIT)"
   min_ansible_version: 2.4

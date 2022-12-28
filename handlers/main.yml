@@ -3,8 +3,8 @@
   service:
     name: "{{ apache_service }}"
     state: "{{ apache_restart_state }}"
-  become: yes
+  become: true
 
 - name: reload systemd
-  become: yes
+  become: true
   command: systemctl daemon-reload
