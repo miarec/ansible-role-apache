@@ -7,10 +7,13 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 def test_service(host):
     if host.system_info.distribution == "debian":
         s = host.service("apache2")
+        assert s.is_enabled
+        assert s.is_running
     if host.system_info.distribution == "centos":
         s = host.service("httpd")
-    assert s.is_enabled
-    assert s.is_running
+        assert s.is_enabled
+        assert s.is_running
+
 
 def test_socket(host):
     sockets = [
