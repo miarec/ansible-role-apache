@@ -9,7 +9,7 @@ name: Ansible role testing
 jobs:
   lint:
     name: lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
       - name: Check out the repository
