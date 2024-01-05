@@ -25,14 +25,13 @@ jobs:
   test:
     name: molecule
     needs: lint
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         distro:
           - centos7
-          - centos8
-          - ubuntu1804
           - ubuntu2004
+          - ubuntu2204
 
     steps:
       - name: Check out the Repository
