@@ -9,4 +9,3 @@ skip_list:
   - yaml[trailing-spaces]
   - yaml[truthy]
   - jinja[spacing]
-

@@ -32,7 +32,7 @@
 
 - name: Configure umask (SystemD Unit)
   lineinfile:
-    path: "/usr/lib/systemd/system/{{apache_service}}.service"
+    path: "/usr/lib/systemd/system/{{ apache_service }}.service"
     regexp: '^UMask='
     line: 'UMask={{ apache_umask }}'
     state: present
