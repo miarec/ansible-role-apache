@@ -31,9 +31,9 @@
               - ubuntu2004
               - ubuntu2204
               - centos7
-            #   - rockylinux8
-            #   - rockylinux9
-            #   - rhel7
+              - rockylinux8
+              - rockylinux9
+              - rhel7
             #   - rhel8
             #   - rhel9
 
