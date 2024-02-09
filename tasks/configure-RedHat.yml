@@ -6,10 +6,11 @@
     line: "{{ item.line }}"
     state: present
   with_items: "{{ apache_ports_configuration_items }}"
-  notify: restart apache
+  notify: Restart apache
 
 - name: Check whether certificates defined in vhosts exist.
-  stat: path={{ item.certificate_file }}
+  stat:
+    path: "{{ item.certificate_file }}"
   register: apache_ssl_certificates
   with_items: "{{ apache_vhosts_ssl }}"
 
@@ -20,20 +21,14 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart apache
+  notify: Restart apache
   when: apache_create_vhosts | bool
-
-- name: Check if localhost cert exists (RHEL 8 and later).
-  stat:
-    path: /etc/pki/tls/certs/localhost.crt
-  register: localhost_cert
-  when: ansible_distribution_major_version | int >= 8
 
 - name: Ensure httpd certs are installed (RHEL 8 and later).
   command: /usr/libexec/httpd-ssl-gencerts
-  when:
-    - ansible_distribution_major_version | int >= 8
-    - not localhost_cert.stat.exists
+  args:
+    creates: /etc/pki/tls/certs/localhost.crt
+  when: ansible_distribution_major_version | int >= 8
 
 - name: Configure umask (SystemD Unit)
   lineinfile:
@@ -43,6 +38,6 @@
     state: present
     insertafter: '^\[Service\]'
   when: ansible_service_mgr == "systemd"
-  notify: 
-    - reload systemd
-    - restart apache
+  notify:
+    - Reload systemd
+    - Restart apache
