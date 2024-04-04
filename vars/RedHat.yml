@@ -9,7 +9,7 @@ apache_vhosts_version: "2.2"
 
 __apache_packages:
   - httpd
-  # - httpd-devel
+  - httpd-devel
   - mod_ssl
   - openssh
 
