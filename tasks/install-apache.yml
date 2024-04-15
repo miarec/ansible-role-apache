@@ -4,4 +4,3 @@
     name: "{{ apache_packages }}"
     state: "{{ apache_packages_state }}"
     update_cache: true
-    # enablerepo: "{{ apache_enablerepo | default(omit, true) }}"
