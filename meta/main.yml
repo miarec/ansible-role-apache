@@ -1,33 +1,21 @@
 ---
-dependencies: []
-
 galaxy_info:
-  author: geerlingguy
+  author: miarec
   description: Apache 2.x for Linux.
-  company: "Midwestern Mac, LLC"
-  license: "license (BSD, MIT)"
-  min_ansible_version: 2.4
+  role_name: apache
+  company: MiaRec, Inc
+  license: MIT
+  min_ansible_version: '2.7'
   platforms:
-    - name: EL
-      versions:
-        - all
-    - name: Fedora
-      versions:
-        - all
-    - name: Amazon
-      versions:
-        - all
-    - name: Debian
-      versions:
-        - all
     - name: Ubuntu
       versions:
-        - trusty
-        - xenial
-        - bionic
-    - name: Solaris
+        - focal
+        - jammy
+    - name: EL
       versions:
-        - 11.3
+        - '7'
+        - '8'
+        - '9'
   galaxy_tags:
     - web
     - apache
@@ -35,4 +23,4 @@ galaxy_info:
     - html
     - httpd
 
-allow_duplicates: true
+dependencies: []

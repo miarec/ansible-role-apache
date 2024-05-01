@@ -3,19 +3,14 @@
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
 
-- name: Include variables for Amazon Linux.
-  include_vars: "AmazonLinux.yml"
-  when:
-    - ansible_distribution == "Amazon"
-    - ansible_distribution_major_version == "NA"
-
 - name: Define apache_packages.
   set_fact:
     apache_packages: "{{ __apache_packages | list }}"
   when: apache_packages is not defined
 
-# Setup/install tasks.
-- include_tasks: "setup-{{ ansible_os_family }}.yml"
+# # Setup/install tasks.
+- name: Install Apache
+  include_tasks: install-apache.yml
 
 # Figure out what version of Apache is installed.
 - name: Get installed version of Apache.

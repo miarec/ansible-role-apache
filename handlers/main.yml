@@ -1,10 +1,10 @@
 ---
-- name: restart apache
+- name: Restart apache
   service:
     name: "{{ apache_service }}"
     state: "{{ apache_restart_state }}"
-  become: yes
+  become: true
 
-- name: reload systemd
-  become: yes
-  command: systemctl daemon-reload
+- name: Reload systemd
+  systemd:
+    daemon_reload: true

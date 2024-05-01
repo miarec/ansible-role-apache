@@ -1,9 +1,8 @@
 # Ansible Role: Apache 2.x
 
-[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-apache.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-apache)
+![CI](https://github.com/miarec/ansible-role-apache/actions/workflows/ci.yml/badge.svg?event=push)
 
-An Ansible Role that installs Apache 2.x on RHEL/CentOS, Debian/Ubuntu, SLES and Solaris.
-
+An Ansible Role that installs Apache 2.x on RHEL 7-9, CentOS 7, Ubuntu 22.04/20.04, RockyLinux 9/8
 ## Requirements
 
 If you are using SSL/TLS, you will need to provide your own certificate and key files. You can generate a self-signed certificate with a command like `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout example.key -out example.crt`.
@@ -13,10 +12,6 @@ If you are using Apache with PHP, I recommend using the `geerlingguy.php` role t
 ## Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
-
-    apache_enablerepo: ""
-
-The repository to use when installing Apache (only used on RHEL/CentOS systems). If you'd like later versions of Apache than are available in the OS's core repositories, use a repository like EPEL (which can be installed with the `geerlingguy.repo-epel` role).
 
     apache_listen_ip: "*"
     apache_listen_port: 80
@@ -139,7 +134,7 @@ None.
       vars_files:
         - vars/main.yml
       roles:
-        - { role: geerlingguy.apache }
+        - { role: miarec.ansible-role-apache }
 
 *Inside `vars/main.yml`*:
 
@@ -150,7 +145,3 @@ None.
 ## License
 
 MIT / BSD
-
-## Author Information
-
-This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
