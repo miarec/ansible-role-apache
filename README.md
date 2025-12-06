@@ -2,7 +2,8 @@
 
 ![CI](https://github.com/miarec/ansible-role-apache/actions/workflows/ci.yml/badge.svg?event=push)
 
-An Ansible Role that installs Apache 2.x on RHEL 7-9, CentOS 7, Ubuntu 22.04/20.04, RockyLinux 9/8
+An Ansible Role that installs Apache 2.x on Ubuntu 22.04/24.04, Rocky Linux 9, and RHEL 9.
+
 ## Requirements
 
 If you are using SSL/TLS, you will need to provide your own certificate and key files. You can generate a self-signed certificate with a command like `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout example.key -out example.crt`.
@@ -101,7 +102,7 @@ If you have enabled any additional repositories such as _ondrej/apache2_, [geerl
 
     apache_ignore_missing_ssl_certificate: true
 
-If you would like to only create SSL vhosts when the vhost certificate is present (e.g. when using Let’s Encrypt), set `apache_ignore_missing_ssl_certificate` to `false`. When doing this, you might need to run your playbook more than once so all the vhosts are configured (if another part of the playbook generates the SSL certificates).
+If you would like to only create SSL vhosts when the vhost certificate is present (e.g. when using Let's Encrypt), set `apache_ignore_missing_ssl_certificate` to `false`. When doing this, you might need to run your playbook more than once so all the vhosts are configured (if another part of the playbook generates the SSL certificates).
 
 ## .htaccess-based Basic Authorization
 
@@ -141,6 +142,42 @@ None.
     apache_listen_port: 8080
     apache_vhosts:
       - {servername: "example.com", documentroot: "/var/www/vhosts/example_com"}
+
+## Testing
+
+This role uses [Molecule](https://molecule.readthedocs.io/) with Docker for testing.
+[uv](https://docs.astral.sh/uv/) is used for dependency management.
+
+### Prerequisites
+
+- Docker
+- uv (install via `curl -LsSf https://astral.sh/uv/install.sh | sh`)
+
+### Running Tests
+
+```bash
+# Run full test suite
+uv run molecule test
+
+# Test against specific distro
+MOLECULE_DISTRO=ubuntu2404 uv run molecule test
+MOLECULE_DISTRO=rockylinux9 uv run molecule test
+```
+
+### Available Distros
+
+| Distribution   | Variable Value  |
+|----------------|-----------------|
+| Ubuntu 22.04   | `ubuntu2204`    |
+| Ubuntu 24.04   | `ubuntu2404`    |
+| Rocky Linux 9  | `rockylinux9`   |
+| RHEL 9         | `rhel9`         |
+
+### Linting
+
+```bash
+uv run ansible-lint
+```
 
 ## License
 

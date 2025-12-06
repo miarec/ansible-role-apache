@@ -6,23 +6,19 @@ Test run of this role
 
 Run Molecule test
 ```
-molecule test
+uv run molecule test
 ```
 
 Run test with variable example
 ```
-MOLECULE_DISTRO=centos7 molecule test
+MOLECULE_DISTRO=rockylinux9 uv run molecule test
 ```
 
 ### Variables
- - `MOLECULE_DISTRO` OS of docker container to test, default `ubuntu2204`
+ - `MOLECULE_DISTRO` OS of docker container to test, default `ubuntu2404`
     List of tested distros
-    - `centos7`
-    - `ubuntu2004`
     - `ubuntu2204`
-    - `rockylinux8`
+    - `ubuntu2404`
     - `rockylinux9`
-    - `rhel7`
-    - `rhel8`
     - `rhel9`
  - `MOLECULE_ANSIBLE_VERBOSITY` 0-3 used for troubleshooting, will set verbosity of ansible output, same as `-vvv`, default `0`
