@@ -20,7 +20,7 @@
     dest: "{{ apache_conf_path }}/{{ apache_vhosts_filename }}"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify: Restart apache
   when: apache_create_vhosts | bool
 
@@ -28,7 +28,7 @@
   command: /usr/libexec/httpd-ssl-gencerts
   args:
     creates: /etc/pki/tls/certs/localhost.crt
-  when: ansible_distribution_major_version | int >= 8
+  when: ansible_facts['distribution_major_version'] | int >= 8
 
 - name: Configure umask (SystemD Unit)
   lineinfile:
@@ -37,7 +37,7 @@
     line: 'UMask={{ apache_umask }}'
     state: present
     insertafter: '^\[Service\]'
-  when: ansible_service_mgr == "systemd"
+  when: ansible_facts['service_mgr'] == "systemd"
   notify:
     - Reload systemd
     - Restart apache
