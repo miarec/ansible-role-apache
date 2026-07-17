@@ -29,9 +29,8 @@ Available distros: `ubuntu2204`, `ubuntu2404`, `rockylinux9`, `rhel9`
 
 The role uses OS-family-based variable loading and task separation:
 
-- **Entry point**: `tasks/main.yml` - Loads OS-specific vars, installs Apache, detects version, configures based on OS family
+- **Entry point**: `tasks/main.yml` - Loads OS-specific vars, installs Apache, configures based on OS family
 - **OS variables**: `vars/Debian.yml`, `vars/RedHat.yml` - Package names, service names, paths
-- **Version variables**: `vars/apache-22.yml`, `vars/apache-24.yml` - Version-specific configuration directives
 - **Configuration tasks**: `tasks/configure-Debian.yml`, `tasks/configure-RedHat.yml`
 - **Templates**: `templates/vhosts.conf.j2` - VirtualHost configuration
 
